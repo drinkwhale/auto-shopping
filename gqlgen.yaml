@@ -1,0 +1,35 @@
+# .gqlgen.yml
+
+# gqlgen이 읽어들일 GraphQL 스키마 파일들의 위치를 지정합니다.
+# api/graphql/ 디렉터리 밑의 모든 .graphqls 파일을 사용하도록 설정합니다.
+schema:
+  - api/graphql/*.graphqls
+
+exec:
+  layout: follow-schema
+  dir: internal/graph
+  package: graph
+
+# 자동 생성된 리졸버의 Go 패키지 경로를 지정합니다.
+# 우리 프로젝트 구조에 맞게 internal/graph로 설정합니다.
+resolver:
+  layout: follow-schema
+  dir: internal/graph
+  package: graph
+
+# 자동 생성된 모델(Go 구조체)의 Go 패키지 경로를 지정합니다.
+# 마찬가지로 internal/graph/model로 설정합니다.
+model:
+  package: model
+  # filename 필드를 주석 처리하면 gqlgen이 알아서 model/models_gen.go로 생성합니다.
+  filename: internal/graph/model/models_gen.go
+
+# gqlgen이 생성하는 핵심 파일들의 경로와 패키지 이름을 명시적으로 제어합니다.
+# exec: 생성된 서버의 진입점(entry point)에 대한 정보 (거의 사용 안 함)
+# exec:
+#   filename: internal/graph/generated/generated.go
+#   package: generated
+#
+# model: 스키마 타입에 매핑되는 Go 구조체
+# model:
+#   package: go-graphql-server/internal/graph/model
